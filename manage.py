@@ -14,8 +14,8 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    Add_Superuser()
     execute_from_command_line(sys.argv)
+    Add_Superuser()
 
 # 用於部署於Render平台，於build階段建立superuser
 def Add_Superuser():
