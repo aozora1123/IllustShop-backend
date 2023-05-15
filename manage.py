@@ -3,7 +3,6 @@
 import os
 import sys
 
-
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'IllustShop.settings')
@@ -17,6 +16,23 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+# 用於部署於Render平台，於build階段建立superuser
+def Add_Superuser():
+    try:
+        from django.contrib.auth.models import User
+        from dotenv import load_dotenv
+        username = os.getenv("SUPERUSER_USERNAME")
+        email = os.getenv("SUPERUSER_USEREMAIL")
+        password = os.getenv("SUPERUSER_USERPASSWORD")
+        # 檢查是否已存在該使用者
+        if not User.objects.filter(username=username).exists():
+            User.objects.create_superuser(username, email, password)
+            print("Superuser created successfully.")
+        else:
+            print("Superuser already exists.")
+
+    except:
+        raise
 
 if __name__ == '__main__':
     main()
