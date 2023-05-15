@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'IllustShop.urls'
@@ -135,3 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False, # 未做登入頁面，取消顯示Django Login按鈕
 }
+
+CORS_ORIGIN_WHITELIST = os.getenv("CORS_WHITELIST").split(',')
+
