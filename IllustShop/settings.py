@@ -90,7 +90,7 @@ DATABASES = {
     #    'HOST': os.getenv("DB_HOST"),
     #    'PORT': os.getenv("DB_PORT")
     #}
-    'default': dj_database_url.config(os.getenv('DATABASE_URL'), conn_max_age=600),
+    'default': dj_database_url.parse(f'{os.getenv("DATABASE_URL")}', conn_max_age=600, conn_health_checks=True,)
 }
 
 
