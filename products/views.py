@@ -5,6 +5,7 @@ from rest_framework import status
 #from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
+from drf_yasg.utils import swagger_auto_schema
 
 class CategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()
@@ -15,24 +16,77 @@ class CategoryList(generics.ListCreateAPIView):
             return [permissions.IsAdminUser()]
         return super().get_permissions()
 
+    @swagger_auto_schema(tags=['for user'])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [permissions.IsAdminUser]
+
+    @swagger_auto_schema(tags=['for admin'])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
 
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(tags=['for admin'])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.IsAdminUser]
 
+    @swagger_auto_schema(tags=['for admin'])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def put(self, request, *args, **kwargs):
+        return super().put(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def patch(self, request, *args, **kwargs):
+        return super().patch(request, *args, **kwargs)
+
+    @swagger_auto_schema(tags=['for admin'])
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
+
 class ProductListByCategoryName(generics.ListAPIView):
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
+
+    @swagger_auto_schema(tags=['for user'])
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         try:
