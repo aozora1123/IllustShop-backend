@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+from datetime import timedelta
 import os
 import dj_database_url
 load_dotenv()
@@ -30,7 +31,7 @@ SECRET_KEY = 'django-insecure-l%-!@3-8jk4f!$$p#)yz%-deh5zv&unt^3v040r@2a6c-c-sbc
 DEBUG = True
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(',')
-
+CORS_ORIGIN_WHITELIST = os.getenv("CORS_WHITELIST").split(',')
 
 # Application definition
 
@@ -42,8 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_yasg',
     'products',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -141,5 +144,16 @@ SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False, # 未做登入頁面，取消顯示Django Login按鈕
 }
 
-CORS_ORIGIN_WHITELIST = os.getenv("CORS_WHITELIST").split(',')
+AUTH_USER_MODEL = 'accounts.Account'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+}
+
 
