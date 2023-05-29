@@ -15,7 +15,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
-    Add_Superuser()
+    #Add_Superuser()
 
 # 用於部署於Render平台，於build階段建立superuser
 def Add_Superuser():
