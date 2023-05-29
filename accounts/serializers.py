@@ -9,3 +9,7 @@ class AccountSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         account = Account.objects.create_user(**validated_data)
         return account
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField()
