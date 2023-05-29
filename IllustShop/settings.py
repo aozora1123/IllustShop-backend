@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'products',
     'accounts',
+    'usercart',
 ]
 
 MIDDLEWARE = [
@@ -148,6 +149,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
 }
